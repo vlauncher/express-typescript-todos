@@ -13,11 +13,13 @@ import connectDB from './config/db';
 connectDB();
 
 // Routes
-import todosRoutes from './routes/todosRoutes';
 import usersRoutes from './routes/usersRoutes';
+import todosRoutes from './routes/todosRoutes';
 
-app.use('/api/v1/auth', usersRoutes);
+
 app.use('/api/v1/todos', todosRoutes);
+app.use('/api/v1/auth', usersRoutes);
+
 
 
 const PORT = process.env.PORT || 3000;

@@ -1,12 +1,15 @@
 import { Document, Schema, model } from "mongoose";
+import { Users } from "./users";
 
-interface ITodos extends Document {
+interface ITodo {
     title: string;
     description: string;
     completed: boolean;
+    userId: any;
 }
 
-const todosSchema = new Schema<ITodos>({
+
+const todoSchema = new Schema<ITodo>({
     title: {
         type: String,
         required: true
@@ -18,7 +21,13 @@ const todosSchema = new Schema<ITodos>({
     completed: {
         type: Boolean,
         default: false
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: Users,
+        required: true,
+        autopopulate: true
     }
 });
 
-export const Todos = model<ITodos>('Todos', todosSchema);
+export const Todos = model<ITodo>("Todo", todoSchema);

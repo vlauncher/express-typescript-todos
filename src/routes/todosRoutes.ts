@@ -1,14 +1,13 @@
 import { Router } from "express";
-import  { getTodos, getTodo, createTodo, updateTodo, deleteTodo, toggleCompleted } from "../controllers/todosControllers";
-
+import { protect } from "../middlewares/auth";
+import { createTodo, getTodos, getTodo, updateTodo, deleteTodo } from "../controllers/todosControllers";
 
 const router = Router();
 
-router.get('/', getTodos);
-router.get('/:id', getTodo);
-router.post('/', createTodo);
-router.put('/:id', updateTodo);
-router.delete('/:id', deleteTodo);
-router.patch('/:id', toggleCompleted);
+router.post('/', protect, createTodo);
+router.get('/', protect, getTodos);
+router.get('/:id', protect, getTodo);
+router.put('/:id', protect, updateTodo);
+router.delete('/:id', protect, deleteTodo);
 
 export default router
