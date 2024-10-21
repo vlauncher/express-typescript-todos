@@ -14,7 +14,10 @@ connectDB();
 
 // Routes
 import todosRoutes from './routes/todosRoutes';
-app.use('/todos', todosRoutes);
+import usersRoutes from './routes/usersRoutes';
+
+app.use('/api/v1/auth', usersRoutes);
+app.use('/api/v1/todos', todosRoutes);
 
 
 const PORT = process.env.PORT || 3000;
