@@ -3,11 +3,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Users } from '../models/users';
 // middleware/protect.ts
 
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
 
-export const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
+export const protect = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   let token;
 
   // Check for token in Authorization header

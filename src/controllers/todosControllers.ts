@@ -2,18 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import { Todos } from "../models/todos";
 import { Users } from "../models/users";
 
-// Middleware
-interface CustomRequest extends Request {
-    user?: any
-}
-
 /**
  * DESC: Create a new todo
  * METHOD: POST
  * URL: http://localhost:8000/api/v1/todos
  * ACCESS: Private
  */
-export const createTodo = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const createTodo = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { title, description } = req.body;
         if (!title || !description) {
@@ -34,7 +29,7 @@ export const createTodo = async (req: CustomRequest, res: Response, next: NextFu
  * ACCESS: Private
  */
 
-export const getTodos = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const getTodos = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Get requested user
         const user: any = await Users.findById(req.user.id);
@@ -56,7 +51,7 @@ export const getTodos = async (req: CustomRequest, res: Response, next: NextFunc
  * ACCESS: Private
  */
 
-export const getTodo = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const getTodo = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const todo = await Todos.findOne({ _id: req.params.id, userId: req.user.id });
         if (!todo) {
@@ -76,7 +71,7 @@ export const getTodo = async (req: CustomRequest, res: Response, next: NextFunct
  * ACCESS: Private
  */ 
 
-export const updateTodo = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const updateTodo = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { title, description } = req.body;
         const todo : any = await Todos.findOne({ _id: req.params.id, userId: req.user.id });
@@ -100,7 +95,7 @@ export const updateTodo = async (req: CustomRequest, res: Response, next: NextFu
  * ACCESS: Private
  */
 
-export const deleteTodo = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const deleteTodo = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const todo: any = await Todos.findOne({ _id: req.params.id, userId: req.user.id });
         if (!todo) {

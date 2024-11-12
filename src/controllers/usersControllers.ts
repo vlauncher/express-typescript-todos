@@ -149,9 +149,6 @@ export const resetPassword = async (req: Request, res: Response, next: NextFunct
     }
 }
 
-interface CustomRequest extends Request {
-    user?: any
-}
 
 /**
  * DESC: Change password
@@ -159,7 +156,7 @@ interface CustomRequest extends Request {
  * URL: http://localhost:8000/api/v1/auth/change-password
  */
 
-export const changePassword = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const changePassword = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { oldPassword, newPassword } = req.body;
         const user: any = await Users.findById(req.user.id);

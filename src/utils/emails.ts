@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = (email: string, subject: string, text: string) => {
     return transporter.sendMail({
-        from: process.env.EMAIL,
+        from: process.env.GMAIL_EMAIL,
         to: email,
         subject,
         text
